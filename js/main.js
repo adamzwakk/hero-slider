@@ -108,11 +108,11 @@ jQuery(document).ready(function($){
 	function checkVideo(hiddenSlide, container, n) {
 		//check if a video outside the viewport is playing - if yes, pause it
 		var hiddenVideo = hiddenSlide.find('video');
-		if( hiddenVideo.length > 0 ) hiddenVideo.get(0).pause();
+		if( hiddenVideo.length > 0 && typeof hiddenVideo.get(0) != 'null') hiddenVideo.get(0).pause();
 
 		//check if the select slide contains a video element - if yes, play the video
 		var visibleVideo = container.children('li').eq(n).find('video');
-		if( visibleVideo.length > 0 ) visibleVideo.get(0).play();
+		if( visibleVideo.length > 0 && typeof visibleVideo.get(0) != 'null') visibleVideo.get(0).play();
 	}
 
 	function updateNavigationMarker(marker, n) {
