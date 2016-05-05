@@ -92,27 +92,31 @@ jQuery(document).ready(function($){
 	}
 
 	function uploadVideo(container) {
-		container.find('.cd-bg-video-wrapper').each(function(){
-			var videoWrapper = $(this);
-			if( videoWrapper.is(':visible') ) {
-				// if visible - we are not on a mobile device 
-				var	videoUrl = videoWrapper.data('video'),
-					video = $('<video loop><source src="'+videoUrl+'.mp4" type="video/mp4" /><source src="'+videoUrl+'.webm" type="video/webm" /></video>');
-				video.appendTo(videoWrapper);
-				// play video if first slide
-				if(videoWrapper.parent('.cd-bg-video.selected').length > 0) video.get(0).play();
-			}
-		});
+		if(Modernizr.video){
+			container.find('.cd-bg-video-wrapper').each(function(){
+				var videoWrapper = $(this);
+				if( videoWrapper.is(':visible') ) {
+					// if visible - we are not on a mobile device 
+					var	videoUrl = videoWrapper.data('video'),
+						video = $('<video loop><source src="'+videoUrl+'.mp4" type="video/mp4" /><source src="'+videoUrl+'.webm" type="video/webm" /></video>');
+					video.appendTo(videoWrapper);
+					// play video if first slide
+					if(videoWrapper.parent('.cd-bg-video.selected').length > 0) video.get(0).play();
+				}
+			});
+		}
 	}
 
 	function checkVideo(hiddenSlide, container, n) {
-		//check if a video outside the viewport is playing - if yes, pause it
-		var hiddenVideo = hiddenSlide.find('video');
-		if( hiddenVideo.length > 0 && typeof hiddenVideo.get(0) != 'null') hiddenVideo.get(0).pause();
+		if(Modernizr.video){
+			//check if a video outside the viewport is playing - if yes, pause it
+			var hiddenVideo = hiddenSlide.find('video');
+			if( hiddenVideo.length > 0) hiddenVideo.get(0).pause();
 
-		//check if the select slide contains a video element - if yes, play the video
-		var visibleVideo = container.children('li').eq(n).find('video');
-		if( visibleVideo.length > 0 && typeof visibleVideo.get(0) != 'null') visibleVideo.get(0).play();
+			//check if the select slide contains a video element - if yes, play the video
+			var visibleVideo = container.children('li').eq(n).find('video');
+			if( visibleVideo.length > 0) visibleVideo.get(0).play();
+		}
 	}
 
 	function updateNavigationMarker(marker, n) {
