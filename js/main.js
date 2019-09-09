@@ -16,6 +16,14 @@ jQuery(document).ready(function($){
 
 		//autoplay slider
 		setAutoplay(slidesWrapper, slidesNumber, autoPlayDelay);
+		
+		//pause autoplay on hover
+		slidesWrapper.on("mouseenter", function() {
+			clearInterval(autoPlayId);
+		});
+		slidesWrapper.on("mouseleave", function() {
+			setAutoplay(slidesWrapper, slidesNumber, autoPlayDelay);
+		});
 
 		//on mobile - open/close primary navigation clicking/tapping the menu icon
 		primaryNav.on('click', function(event){
