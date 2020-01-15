@@ -54,6 +54,14 @@ jQuery(document).ready(function($){
 				setAutoplay(slidesWrapper, slidesNumber, autoPlayDelay);
 			}
 		});
+		
+		if(slidesWrapper.hasClass('autoplay')) {
+			slidesWrapper.hover(function () {
+				clearInterval(autoPlayId);
+			}, function () {
+				setAutoplay(slidesWrapper, slidesNumber, autoPlayDelay);
+			});
+		}
 	}
 
 	function nextSlide(visibleSlide, container, pagination, n){
